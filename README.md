@@ -97,8 +97,3 @@ pytest tests/
 | **DELETE** | `/obrigacoes/{id}`   | Deletar obrigação |
 
 ---
-
-## 📌 Autor
-👤 **[Seu Nome]**  
-📧 Email: [seuemail@example.com]  
-🔗 GitHub: [https://github.com/seu-usuario](https://github.com/seu-usuario)
