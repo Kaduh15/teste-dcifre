@@ -32,3 +32,25 @@ def obter_obrigacao(obrigacao_id: int, db: Session = Depends(get_db)):
     if not obrigacao:
         raise HTTPException(status_code=404, detail="Obrigação não encontrada")
     return obrigacao
+
+
+@router.put("/{obrigacao_id}", response_model=ObrigacaoAcessoriaResponse)
+def atualizar_obrigacao(
+    obrigacao_id: int,
+    obrigacao_update: ObrigacaoAcessoriaCreate,
+    db: Session = Depends(get_db),
+):
+    obrigacao = (
+        db.query(ObrigacaoAcessoria)
+        .filter(ObrigacaoAcessoria.id == obrigacao_id)
+        .first()
+    )
+    if not obrigacao:
+        raise HTTPException(status_code=404, detail="Obrigação não encontrada")
+
+    for key, value in obrigacao_update.dict().items():
+        setattr(obrigacao, key, value)
+
+    db.commit()
+    db.refresh(obrigacao)
+    return obrigacao
