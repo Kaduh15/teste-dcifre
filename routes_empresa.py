@@ -44,3 +44,14 @@ def atualizar_empresa(
     db.commit()
     db.refresh(empresa)
     return empresa
+
+
+@router.delete("/{empresa_id}")
+def deletar_empresa(empresa_id: int, db: Session = Depends(get_db)):
+    empresa = db.query(Empresa).filter(Empresa.id == empresa_id).first()
+    if not empresa:
+        raise HTTPException(status_code=404, detail="Empresa não encontrada")
+
+    db.delete(empresa)
+    db.commit()
+    return {"message": "Empresa deletada com sucesso"}
