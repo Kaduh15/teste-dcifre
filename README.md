@@ -1,10 +1,3 @@
-Aqui está um **README.md** bem estruturado para seu projeto! 🎯📌  
-Ele inclui informações sobre instalação, execução e testes. 🚀  
-
----
-
-### 📌 **Arquivo `README.md`**
-```md
 # 📌 API de Empresas e Obrigações Acessórias 🚀
 
 Este projeto é uma API construída com **FastAPI**, **SQLAlchemy** e **PostgreSQL** para gerenciar **empresas** e suas **obrigações acessórias**. A API permite criar, listar, atualizar e deletar empresas e obrigações acessórias de forma eficiente.
