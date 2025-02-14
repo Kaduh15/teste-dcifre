@@ -20,3 +20,15 @@ def criar_obrigacao(obrigacao: ObrigacaoAcessoriaCreate, db: Session = Depends(g
 @router.get("/", response_model=List[ObrigacaoAcessoriaResponse])
 def listar_obrigacoes(db: Session = Depends(get_db)):
     return db.query(ObrigacaoAcessoria).all()
+
+
+@router.get("/{obrigacao_id}", response_model=ObrigacaoAcessoriaResponse)
+def obter_obrigacao(obrigacao_id: int, db: Session = Depends(get_db)):
+    obrigacao = (
+        db.query(ObrigacaoAcessoria)
+        .filter(ObrigacaoAcessoria.id == obrigacao_id)
+        .first()
+    )
+    if not obrigacao:
+        raise HTTPException(status_code=404, detail="Obrigação não encontrada")
+    return obrigacao
