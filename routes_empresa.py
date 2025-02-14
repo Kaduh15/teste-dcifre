@@ -28,3 +28,19 @@ def obter_empresa(empresa_id: int, db: Session = Depends(get_db)):
     if not empresa:
         raise HTTPException(status_code=404, detail="Empresa não encontrada")
     return empresa
+
+
+@router.put("/{empresa_id}", response_model=EmpresaResponse)
+def atualizar_empresa(
+    empresa_id: int, empresa_update: EmpresaCreate, db: Session = Depends(get_db)
+):
+    empresa = db.query(Empresa).filter(Empresa.id == empresa_id).first()
+    if not empresa:
+        raise HTTPException(status_code=404, detail="Empresa não encontrada")
+
+    for key, value in empresa_update.dict().items():
+        setattr(empresa, key, value)
+
+    db.commit()
+    db.refresh(empresa)
+    return empresa
