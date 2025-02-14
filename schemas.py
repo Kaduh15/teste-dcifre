@@ -1,7 +1,5 @@
 from pydantic import BaseModel, EmailStr
-from typing import List
-from pydantic import BaseModel
-from typing import Literal
+from typing import List, Literal
 
 
 class ObrigacaoAcessoriaBase(BaseModel):
