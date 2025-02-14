@@ -2,6 +2,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 from database_base import Base
 
+
 class Empresa(Base):
     __tablename__ = "empresas"
 
@@ -12,7 +13,10 @@ class Empresa(Base):
     email = Column(String, nullable=False)
     telefone = Column(String, nullable=False)
 
-    obrigacoes = relationship("ObrigacaoAcessoria", back_populates="empresa", cascade="all, delete")
+    obrigacoes = relationship(
+        "ObrigacaoAcessoria", back_populates="empresa", cascade="all, delete"
+    )
+
 
 class ObrigacaoAcessoria(Base):
     __tablename__ = "obrigacoes_acessorias"
