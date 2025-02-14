@@ -1,5 +1,9 @@
 from pydantic import BaseModel, EmailStr
+<<<<<<< HEAD
 from typing import List
+=======
+from typing import Optional, List
+>>>>>>> 46a7105951eaeb6def22d8bbda62f02ec1701e74
 from pydantic import BaseModel
 from typing import Literal
 
