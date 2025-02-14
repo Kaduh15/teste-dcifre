@@ -48,9 +48,24 @@ def atualizar_obrigacao(
     if not obrigacao:
         raise HTTPException(status_code=404, detail="Obrigação não encontrada")
 
-    for key, value in obrigacao_update.dict().items():
+    for key, value in obrigacao_update.model_dump().items():
         setattr(obrigacao, key, value)
 
     db.commit()
     db.refresh(obrigacao)
     return obrigacao
+
+
+@router.delete("/{obrigacao_id}")
+def deletar_obrigacao(obrigacao_id: int, db: Session = Depends(get_db)):
+    obrigacao = (
+        db.query(ObrigacaoAcessoria)
+        .filter(ObrigacaoAcessoria.id == obrigacao_id)
+        .first()
+    )
+    if not obrigacao:
+        raise HTTPException(status_code=404, detail="Obrigação não encontrada")
+
+    db.delete(obrigacao)
+    db.commit()
+    return {"message": "Obrigação deletada com sucesso"}
