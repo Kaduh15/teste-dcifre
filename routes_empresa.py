@@ -38,7 +38,7 @@ def atualizar_empresa(
     if not empresa:
         raise HTTPException(status_code=404, detail="Empresa não encontrada")
 
-    for key, value in empresa_update.dict().items():
+    for key, value in empresa_update.model_dump().items():
         setattr(empresa, key, value)
 
     db.commit()
